@@ -1,4 +1,4 @@
-int main() {
+void constExpressions() {
     {
         // Equal expressions. Const value.
         const int x = 5;
@@ -79,6 +79,56 @@ int main() {
         // rx = ry;
         // rx = 0;
     }
+}
+
+void constCasts() {
+    {
+        const int x = 10;
+
+        // Compile error.
+        // x = 0;
+
+        int* px = const_cast<int*>(&x);
+
+        // OK
+        *px = 0;
+    }
+
+    {
+        int x = 10;
+
+        const int* px = const_cast<const int*>(&x);
+
+        // Compile error.
+        // *px = 0;
+    }
+
+    {
+        const int x = 10;
+        const int& crx = x;
+
+        // Compile error.
+        // crx = 0;
+
+        int& rx = const_cast<int&>(x);
+
+        // OK
+        rx = 0;
+    }
+
+    {
+        int x = 10;
+
+        const int& rx = const_cast<const int&>(x);
+
+        // Compile error.
+        // rx = 0;
+    }
+}
+
+int main() {
+    constExpressions();
+    constCasts();
 
     return 0;
 }
