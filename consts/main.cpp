@@ -1,8 +1,8 @@
 void constExpressions() {
     {
         // Equal expressions. Const value.
-        const int x = 5;
-        int const y = 10;
+        const int x [[maybe_unused]] = 5;
+        int const y [[maybe_unused]] = 10;
 
         // Compile error.
         // x = 0;
@@ -17,8 +17,8 @@ void constExpressions() {
         int y = 10;
 
         // Equal expressions. Non-const pointer on const value.
-        const int* px = &x;
-        int const* py = &y;
+        const int* px [[maybe_unused]] = &x;
+        int const* py [[maybe_unused]] = &y;
 
         // Compile error.
         // *px = 0;
@@ -45,8 +45,8 @@ void constExpressions() {
         int y = 10;
 
         // Equal expressions. Const pointer on const value.
-        const int* const px = &x;
-        int const* const py = &y;
+        const int* const px [[maybe_unused]] = &x;
+        int const* const py [[maybe_unused]] = &y;
 
         // Compile error.
         // px = nullptr;
@@ -72,8 +72,8 @@ void constExpressions() {
         int y = 10;
 
         // Equal expressions. Reference on const value.
-        int const& rx = x;
-        const int& ry = y;
+        int const& rx [[maybe_unused]] = x;
+        const int& ry [[maybe_unused]] = y;
 
         // Compile error.
         // rx = ry;
@@ -97,7 +97,7 @@ void constCasts() {
     {
         int x = 10;
 
-        const int* px = const_cast<const int*>(&x);
+        const int* px [[maybe_unused]] = const_cast<const int*>(&x);
 
         // Compile error.
         // *px = 0;
@@ -105,7 +105,7 @@ void constCasts() {
 
     {
         const int x = 10;
-        const int& crx = x;
+        const int& crx[[maybe_unused]] = x;
 
         // Compile error.
         // crx = 0;
@@ -119,7 +119,7 @@ void constCasts() {
     {
         int x = 10;
 
-        const int& rx = const_cast<const int&>(x);
+        const int& rx [[maybe_unused]] = const_cast<const int&>(x);
 
         // Compile error.
         // rx = 0;
